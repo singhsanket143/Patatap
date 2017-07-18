@@ -17,6 +17,7 @@
       var circlesE=[];
       var arrayW=[];
       var arrayU=[];
+      var arrayF=[];
       var sound1 = new Howl({
         src: ['sounds/bubbles.mp3']
       });
@@ -131,7 +132,23 @@
               fillColor: 'Brown'
           });
           arrayU.push(path);
+          }
         }
+        if(event.key=="f"){
+          sound7.play();
+          var circlePath = new Path.Circle(new Point(880, 500), 200);
+          circlePath.strokeColor = 'SlateBlue';
+          circlePath.fillColor = 'RoyalBlue';
+
+          var clones = 30;
+          var angle = 360 / clones;
+          arrayF.push(circlePath);
+          for(var i = 0; i < clones; i++) {
+          	var clonedPath = circlePath.clone();
+            clonedPath.fillColor.hue+=10;
+          	clonedPath.rotate(angle * i, circlePath.bounds.topLeft);
+            arrayF.push(clonedPath);
+          };
         }
     }
     function onKeyUp(event){
@@ -184,10 +201,18 @@
         for(var i=0;i<arrayU.length;i++){
 
           arrayU[i].fillColor.hue+=2;
-          arrayU[i].rotate(10);
+          arrayU[i].rotate(3);
           arrayU[i].scale(0.98);
           if(arrayU.length>500)
             arrayU.splice(0,1);
+        }
+        for(var i=0;i<arrayF.length;i++){
+
+          arrayF[i].fillColor.hue+=2;
+          arrayF[i].rotate(15);
+          arrayF[i].scale(0.98);
+          if(arrayF.length>500)
+            arrayF.splice(0,1);
         }
       }
 
