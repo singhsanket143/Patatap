@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CIrcle</title>
+  <script type="text/javascript" src="paper-full.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.4/howler.js"></script>
+  <link rel="stylesheet" href="circles.css">
+  <script type="text/paperscript" canvas="myCanvas">
+
+  var circlesA=[];
+  var circlesQ=[];
+  var lines=[];
+  var sound1 = new Howl({
+  src: ['sounds/bubbles.mp3']
+});
+var sound2 = new Howl({
+src: ['sounds/clay.mp3']
+});
+  function onKeyDown(event) {
+
+    var maxPoint=new Point(view.size.width,view.size.height);
+    var randomPont=Point.random();
+    var point=maxPoint*randomPont;
+    console.log(maxPoint);
+    if(event.key=="a"){
+      sound1.play();
+      var newCircle=new Path.Circle(point,500);
+      newCircle.fillColor="Orange";
+  	  circlesA.push(newCircle);
+    }
+    if(event.key=="q"){
+      sound2.play();
+      var point = new Point(170,-200);
+      var size = new Size(1000, 1000);
+      var path = new Path.Rectangle(point, size);
+      path.fillColor = 'pink';
+      var point1 = new Point(-170,-200);
+      var size1 = new Size(1000, 1000);
+      var path1 = new Path.Rectangle(point1, size1);
+      path1.fillColor = 'pink';
+      var point2 = new Point(540,-200);
+      var size2 = new Size(1000, 1000);
+      var path2 = new Path.Rectangle(point2, size2);
+      path2.fillColor = 'pink';
+      var point3 = new Point(170,-500);
+      var size3 = new Size(1000, 1000);
+      var path3 = new Path.Rectangle(point3, size3);
+      path3.fillColor = 'pink';
+      var point4 = new Point(170,-200);
+      var size4 = new Size(1000, 1000);
+      var path4 = new Path.Rectangle(point4, size4);
+      path4.fillColor = 'pink';
+      var point5 = new Point(170,100);
+      var size5 = new Size(1000, 1000);
+      var path5 = new Path.Rectangle(point5, size5);
+      path5.fillColor = 'pink';
+      lines.push(path1);
+      lines.push(path);
+      lines.push(path2);
+      lines.push(path3);
+      lines.push(path4);
+      lines.push(path5);
+    }
+}
+  function onFrame(event){
+    var maxPoint=new Point(view.size.width,view.size.height);
+    var randomPont=Point.random();
+    for(var i=0;i<circlesA.length;i++){
+      circlesA[i].fillColor.hue+=3;
+      circlesA[i].scale(0.92);
+      console.log(circlesA.length);
+      if(circlesA.length>100)
+        circlesA.splice(0,1);
+    }
+
+    for(var i=0;i<lines.length;i++){
+      lines[i].fillColor.hue+=4;
+      lines[i].rotate(10);
+      lines[i].scale(0.97);
+      if(lines.length>100)
+        lines.splice(0,1);
+    }
+  }
+
+  </script>
+</head>
+
+<body>
+  <canvas id="myCanvas" resize></canvas>
+</body>
+</html>
