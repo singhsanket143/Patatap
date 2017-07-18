@@ -2,16 +2,24 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>CIrcle</title>
+  <title>My_Patatap</title>
   <script type="text/javascript" src="paper-full.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.4/howler.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet prefetch' href='css/ewxggx.css'>
   <link rel="stylesheet" href="circles.css">
+  <script type="text/javascript">
+
+  </script>
   <script type="text/paperscript" canvas="myCanvas">
 
       var circlesA=[];
       var lines=[];
       var lines1=[];
       var circlesE=[];
+      var arrayW=[];
+      var arrayU=[];
       var sound1 = new Howl({
         src: ['sounds/bubbles.mp3']
       });
@@ -21,14 +29,21 @@
       var sound3 = new Howl({
         src: ['sounds/confetti.mp3']
       });
+      var sound4 = new Howl({
+        src: ['sounds/corona.mp3']
+      });
+      var sound5 = new Howl({
+        src: ['sounds/flash-1.mp3']
+      });
       function onKeyDown(event) {
 
-        var maxPoint=new Point(view.size.width,view.size.height);
-        var randomPont=Point.random();
-        var point=maxPoint*randomPont;
+
         console.log(maxPoint);
         if(event.key=="a"){
           sound1.play();
+          var maxPoint=new Point(view.size.width,view.size.height);
+          var randomPont=Point.random();
+          var point=maxPoint*randomPont;
           var newCircle=new Path.Circle(point,500);
           newCircle.fillColor="Orange";
       	  circlesA.push(newCircle);
@@ -74,9 +89,30 @@
           newCircle.fillColor="Indigo";
           circlesE.push(newCircle);
         }
+        if(event.key=="w"){
+          sound4.play();
+          var p1=new Point(650,300);
+          var newCircle=new Path.Circle(p1,200);
+          newCircle.fillColor="Azure";
+          arrayW.push(newCircle);
+        }
+        if(event.key=="j"){
+          sound5.play();
+          var p1=new Point(650,300);
+          var newCircle=new Path.Circle(p1,200);
+          newCircle.fillColor="Chartreuse";
+          arrayW.push(newCircle);
+        }
+
+        // if(event.key=="u"){
+        //   var p1=new Point(650,300);
+        //   var newCircle=new Path.Circle(p1,200);
+        //   newCircle.fillColor="Chartreuse";
+        //   arrayU.push(newCircle);
+        // }
     }
     function onKeyUp(event){
-      if(event.key=="q"){
+      if(event.key=="q" ){
         var p1=new Point(650,300);
         var newCircle=new Path.Circle(p1,200);
         newCircle.fillColor="Gainsboro";
@@ -117,6 +153,16 @@
             lines1.splice(0,1);
         }
 
+        for(var i=0;i<arrayW.length;i++){
+          arrayW[i].skew(100);
+
+        }
+
+        // for(var i=0;i<arrayU.length;i++){
+        //   arrayU[i].scale(0.9,5,-1);
+        //   if(arrayU.length>50)
+        //     arrayU.splice(0,1);
+        // }
       }
 
   </script>
@@ -124,5 +170,7 @@
 
 <body>
   <canvas id="myCanvas" resize></canvas>
+  <script src='js/ymlarg.js'></script>
+  <script src="js/index.js"></script>
 </body>
 </html>
